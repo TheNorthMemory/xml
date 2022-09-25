@@ -144,7 +144,7 @@ class TransformerTest extends TestCase
     /**
      * @return array<string,array{string,mixed}>
      */
-    public function xmlToArraRecursiveDataProvider(): array
+    public function xmlToArrayRecursiveDataProvider(): array
     {
         return [
             $f = 'alipay-fuwuchuang-event-response.xml' => [
@@ -452,7 +452,7 @@ class TransformerTest extends TestCase
             $f = 'weixin-work-create_user.xml' => [
                 self::getContents($f),
                 [
-                    'ToUserName'     => [ 'assertIsString', null],
+                    'ToUserName'     => ['assertIsString', null],
                     'FromUserName'   => ['assertIsString', null],
                     'CreateTime'     => ['assertIsString', null],
                     'MsgType'        => ['assertIsString', null],
@@ -589,7 +589,7 @@ class TransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider xmlToArraRecursiveDataProvider
+     * @dataProvider xmlToArrayRecursiveDataProvider
      * @param string $xmlString
      * @param array{string,mixed} $keys
      */

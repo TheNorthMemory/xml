@@ -1,0 +1,9 @@
+<alipay_fund_auth_order_voucher_create_response>
+  <code>10000</code>
+  <msg>Success</msg>
+  <out_order_no>8077735255938023</out_order_no>
+  <out_request_no>8077735255938032</out_request_no>
+  <code_type>qrCode</code_type>
+  <code_value>https://qr.alipay.com/aax017928umnzqo0uswmzd3</code_value>
+  <code_url>http://mobilecodec.alipay.com/show.htm?code=aeparsv2dknkqf3018556a</code_url>
+</alipay_fund_auth_order_voucher_create_response>

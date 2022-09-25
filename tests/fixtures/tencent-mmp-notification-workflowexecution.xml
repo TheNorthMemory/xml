@@ -1,0 +1,35 @@
+<Response>
+    <WorkflowExecution>
+        <RunId>ie4d9187d35dc11eb9cec525400860000</RunId>
+        <BucketId>test-1250000000</BucketId>
+        <Object>0000.mp4</Object>
+        <CosHeaders>
+            <Key>x-cos-meta-id</Key>
+            <Value>testid</Value>
+        </CosHeaders>
+        <WorkflowId>w2b22307fb0e44107bc8ffe71e1d20000</WorkflowId>
+        <WorkflowName>dddd</WorkflowName>
+        <CreateTime>2020-12-01 11:00:41+0800</CreateTime>
+        <State>Success</State>
+        <Tasks>
+            <Type>Transcode</Type>
+            <CreateTime>2020-12-01 11:00:42+0800</CreateTime>
+            <EndTime>2020-12-01 11:00:45+0800</EndTime>
+            <State>Success</State>
+            <JobId>je5195f3e35dc11ebbe6fed17a7c10000</JobId>
+            <Name>Transcode_1600413767353</Name>
+            <TemplateId>t182c0ca7d91ca40969a3fc97c5559091a</TemplateId>
+            <TemplateName>模板名称</TemplateName>
+        </Tasks>
+        <Tasks>
+            <Type>Transcode</Type>
+            <CreateTime>2020-12-01 11:00:42+0800</CreateTime>
+            <EndTime>2020-12-01 11:00:45+0800</EndTime>
+            <State>Success</State>
+            <JobId>je55e922035dc11ebbe6fed17a7c10000</JobId>
+            <Name>Transcode_1600413767444</Name>
+            <TemplateId>t182c0ca7d91ca40969a3fc97c5559091b</TemplateId>
+            <TemplateName>模板名称1</TemplateName>
+        </Tasks>
+    </WorkflowExecution>
+</Response>

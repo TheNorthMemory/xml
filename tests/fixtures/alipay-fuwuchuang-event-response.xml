@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<alipay>
+    <response>
+        <success>true</success>
+    </response>
+    <app_cert_sn>6cd4ee7e4f31c1adba2380cc65da4a3a</app_cert_sn>
+    <sign>DXr8LVfHytoZ3RR0K95pzGtA3d9LdpjIjLEis2BDIPQisPwS+FMFxZt9NCMt531EeDj/nbzoIAz8Or7PuqxNfSzNI8qnhirm/Hvr8uedXX9JiQxHu8q3Rw2lJWD8cqQzgf3xwV/+wbN8yuI7s8xjo6odq6NCqrAIu7E0DDfZyKo=</sign>
+    <sign_type>RSA2</sign_type>
+</alipay>

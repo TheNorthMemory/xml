@@ -1,0 +1,5 @@
+<alipay_data_dataservice_bill_downloadurl_query_response>
+<code>10000</code>
+<msg>Success</msg>
+<bill_download_url><![CDATA[http://dwbillcenter.alipay.com/downloadBillFile.resource?bizType=X&userId=X&fileType=X&bizDates=X&downloadFileName=X&fileId=X]]></bill_download_url>
+</alipay_data_dataservice_bill_downloadurl_query_response>

@@ -30,6 +30,6 @@
         "psr-4": { "TheNorthMemory\\Xml\\Tests\\" : "tests/" }
     },
     "scripts": {
-        "test": "phpstan && phpunit"
+        "test": ["phpstan", "phpunit"]
     }
 }

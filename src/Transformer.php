@@ -139,6 +139,18 @@ class Transformer
     }
 
     /**
+     * Wrap the native `Array` data with spicial `label` and mark it whether or nor is wrapped by this `label`.
+     *
+     * @param array $data - The data
+     * @param boolean $wrapped - the wrapping flag, default is `false`
+     * @param string $label - The label, default is `item`
+     */
+    public static function wrap(array $data, bool $wrapped = false, string $label = 'item'): LabeledArrayIterator
+    {
+        return (new LabeledArrayIterator($data))->wrapped($wrapped)->withLabel($label);
+    }
+
+    /**
      * Walk the given data array by the `XMLWriter` instance.
      *
      * @param \XMLWriter $writer - The `XMLWriter` instance reference
@@ -149,13 +161,17 @@ class Transformer
     {
         foreach ($data as $key => $value) {
             $tag = is_string($key) && static::isElementNameValid($key) ? $key : $item;
-            $writer->startElement($tag);
+            $withoutParentElement = false;
+            if ($value instanceof LabeledArrayIterator && ($withoutParentElement = $value->isWrapped())) {
+                $tag = $value->getLabel();
+            }
+            $withoutParentElement || $writer->startElement($tag);
             if (is_array($value) || (is_object($value) && $value instanceof Traversable)) {
-                static::walk($writer, (array) $value, $item);
+                static::walk($writer, (array) $value, $withoutParentElement ? $tag : $item);
             } else {
                 static::content($writer, (string) $value);
             }
-            $writer->endElement();
+            $withoutParentElement || $writer->endElement();
         }
     }
 

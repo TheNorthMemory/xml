@@ -28,6 +28,47 @@ $array = Transformer::toArray('<xml><hello>world</hello></xml>');
 $xml = Transformer::toXml($array);
 // print_r($xml);
 // <xml><hello>world</hello></xml>
+$xml = <<<TencentCOSRequest
+<Request>
+<Operation>
+ <WatermarkTemplateId>t146d70eb241c44c63b6efc1cc93ccfc5d</WatermarkTemplateId>
+ <WatermarkTemplateId>t12a74d11687d444deba8a6cc52051ac27</WatermarkTemplateId>
+</Operation>
+</Request>
+TencentCOSRequest;
+$array = Transformer::toArray($xml);
+// Array
+// (
+//     [Operation] => Array
+//         (
+//             [WatermarkTemplateId] => Array
+//                 (
+//                     [0] => t146d70eb241c44c63b6efc1cc93ccfc5d
+//                     [1] => t12a74d11687d444deba8a6cc52051ac27
+//                 )
+
+//         )
+
+// )
+$xml1 = Transformer::toXml($array, true, true, 'Request');
+// print_r($xml);
+// <Request>
+//  <Operation>
+//   <WatermarkTemplateId>
+//    <item>t146d70eb241c44c63b6efc1cc93ccfc5d</item>
+//    <item>t12a74d11687d444deba8a6cc52051ac27</item>
+//   </WatermarkTemplateId>
+//  </Operation>
+// </Request>
+$array['Operation']['WatermarkTemplateId'] = Transformer::wrap($array['Operation']['WatermarkTemplateId'], true, 'WatermarkTemplateId');
+$xml2 = Transformer::toXml($array, true, true, 'Request');
+// print_r($xml);
+// <Request>
+// <Operation>
+//  <WatermarkTemplateId>t146d70eb241c44c63b6efc1cc93ccfc5d</WatermarkTemplateId>
+//  <WatermarkTemplateId>t12a74d11687d444deba8a6cc52051ac27</WatermarkTemplateId>
+// </Operation>
+// </Request>
 ```
 
 ## License

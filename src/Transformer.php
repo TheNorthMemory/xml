@@ -141,7 +141,7 @@ class Transformer
     /**
      * Wrap the native `Array` data with spicial `label` and mark it whether or nor is wrapped by this `label`.
      *
-     * @param array $data - The data
+     * @param array<int|string,mixed> $data - The data
      * @param boolean $wrapped - the wrapping flag, default is `false`
      * @param string $label - The label, default is `item`
      */

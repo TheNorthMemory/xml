@@ -51,7 +51,7 @@ $array = Transformer::toArray($xml);
 
 // )
 $xml1 = Transformer::toXml($array, true, true, 'Request');
-// print_r($xml);
+// print_r($xml1);
 // <Request>
 //  <Operation>
 //   <WatermarkTemplateId>
@@ -62,7 +62,7 @@ $xml1 = Transformer::toXml($array, true, true, 'Request');
 // </Request>
 $array['Operation']['WatermarkTemplateId'] = Transformer::wrap($array['Operation']['WatermarkTemplateId'], true, 'WatermarkTemplateId');
 $xml2 = Transformer::toXml($array, true, true, 'Request');
-// print_r($xml);
+// print_r($xml2);
 // <Request>
 // <Operation>
 //  <WatermarkTemplateId>t146d70eb241c44c63b6efc1cc93ccfc5d</WatermarkTemplateId>

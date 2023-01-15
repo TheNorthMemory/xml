@@ -78,4 +78,4 @@ jobs:
       - run: |
           vendor/bin/phpstan analyze --level=6 --no-progress
           vendor/bin/phpunit
-        if: maxtrix.php-version == '7.1'
+        if: matrix.php-version == '7.1'

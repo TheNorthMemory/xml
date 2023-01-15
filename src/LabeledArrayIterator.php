@@ -6,6 +6,11 @@ use ArrayIterator;
 
 /**
  * Labeled ArrayIterator with special wrapped flag
+ *
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @extends ArrayIterator<TKey,TValue>
  */
 class LabeledArrayIterator extends ArrayIterator
 {
@@ -23,6 +28,7 @@ class LabeledArrayIterator extends ArrayIterator
      * `Label` setter
      *
      * @param string $value - the label value
+     * @return self<TKey,TValue>
      */
     public function withLabel(string $value): self
     {
@@ -43,6 +49,7 @@ class LabeledArrayIterator extends ArrayIterator
      * `wrapped` flag setter
      *
      * @param bool $value - the flag value, default is `true`
+     * @return self<TKey,TValue>
      */
     public function wrapped(bool $value = true): self
     {

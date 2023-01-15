@@ -29,6 +29,9 @@ use XMLWriter;
 
 /**
  * Transform the `XML` to `Array` or `Array` to `XML`.
+ *
+ * @template TKey of array-key
+ * @template TValue of \Stringable
  */
 class Transformer
 {
@@ -42,7 +45,7 @@ class Transformer
      *
      * @param string $xml - The xml string, default is `<xml/>` string
      *
-     * @return array<string,string|array|mixed>
+     * @return array<TKey,TValue>
      */
     public static function toArray(string $xml = '<xml/>'): array
     {
@@ -73,9 +76,9 @@ class Transformer
     /**
      * Recursive cast the $thing as array data structure.
      *
-     * @param array<string,mixed>|object|\SimpleXMLElement $thing - The thing
+     * @param array<TKey,SimpleXMLElement|TValue>|SimpleXMLElement $thing - The thing
      *
-     * @return array<string,string|array|mixed>
+     * @return array<TKey,TValue>
      */
     protected static function cast($thing): array
     {
@@ -86,9 +89,9 @@ class Transformer
     }
 
     /**
-     * Cast the value $thing, specially doing the `array`, `object`, `SimpleXMLElement` to `array`
+     * Cast the value $thing, specially doing the `array`, `SimpleXMLElement` to `array`
      *
-     * @param string|array<string,string|\SimpleXMLElement|mixed>|object|\SimpleXMLElement $thing - The value thing reference
+     * @param array<TKey,TValue>|SimpleXMLElement $thing - The value thing reference
      */
     protected static function value(&$thing): void
     {
@@ -114,7 +117,7 @@ class Transformer
     /**
      * Transform the given $data array as of an XML string.
      *
-     * @param array<string,string|array|mixed> $data - The data array
+     * @param array<TKey,TValue|LabeledArrayIterator<TKey,TValue>> $data - The data array
      * @param boolean $headless - The headless flag, default `true` means without the `<?xml version="1.0" encoding="UTF-8" ?>` doctype
      * @param boolean $indent - Toggle indentation on/off, default is `false` off
      * @param string $root - The root node label, default is `xml` string
@@ -141,9 +144,11 @@ class Transformer
     /**
      * Wrap the native `Array` data with spicial `label` and mark it whether or nor is wrapped by this `label`.
      *
-     * @param array<int|string,mixed> $data - The data
+     * @param array<TKey,TValue> $data - The data
      * @param boolean $wrapped - the wrapping flag, default is `false`
      * @param string $label - The label, default is `item`
+     *
+     * @return LabeledArrayIterator<TKey,TValue>
      */
     public static function wrap(array $data, bool $wrapped = false, string $label = 'item'): LabeledArrayIterator
     {
@@ -154,7 +159,7 @@ class Transformer
      * Walk the given data array by the `XMLWriter` instance.
      *
      * @param \XMLWriter $writer - The `XMLWriter` instance reference
-     * @param array<string,string|array|mixed> $data - The data array
+     * @param array<TKey,TValue|array<TKey,TValue>|LabeledArrayIterator<TKey,TValue>> $data - The data array
      * @param string $item - The nest array identify tag text
      */
     protected static function walk(XMLWriter &$writer, array $data, string $item): void

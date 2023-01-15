@@ -71,6 +71,24 @@ $xml2 = Transformer::toXml($array, true, true, 'Request');
 // </Request>
 ```
 
+## API
+
+**`Transformer::toArray(string $xml = '<xml/>')`**
+
+Parse the XML `string` to `array`.
+
+**`Transformer::sanitize(string $xml = '<xml/>')`**
+
+Sanitize the XML `string` in the [XML1.0 20081126 Character Range](https://www.w3.org/TR/2008/REC-xml-20081126/#charsets).
+
+**`Transformer::toXml(array $data, bool $headless = true, bool $indent = false, string $root = 'xml', string $item = 'item'): string`**
+
+Build the data `array` to XML `string`.
+
+**`Transformer::wrap(array $data, bool $wrapped = false, string $label = 'item'): LabeledArrayIterator`**
+
+Wrap the `array` data with a `label` and `wrapped` flag.
+
 ## License
 
 [Apache-2.0 License](LICENSE)

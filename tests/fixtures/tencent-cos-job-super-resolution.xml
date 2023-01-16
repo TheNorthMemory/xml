@@ -1,0 +1,39 @@
+<Request>
+    <Tag>SuperResolution</Tag>
+    <Input>
+        <Object>input/demo.mp4</Object>
+    </Input>
+    <Operation>
+        <TemplateId>t1460606b9752148c4ab182f55163ba7cd</TemplateId>
+        <TranscodeTemplateId>t160606b9752148c4absdfaf2f55163b1f</TranscodeTemplateId>
+        <WatermarkTemplateId>t146d70eb241c44c63b6efc1cc93ccfc5d</WatermarkTemplateId>
+        <WatermarkTemplateId>t12a74d11687d444deba8a6cc52051ac27</WatermarkTemplateId>
+        <Watermark>
+            <Type>Text</Type>
+            <LocMode>Absolute</LocMode>
+            <StartTime>0</StartTime>
+            <EndTime>100.5</EndTime>
+        </Watermark>
+        <Watermark>
+            <Type>Text</Type>
+            <LocMode>Absolute</LocMode>
+            <StartTime>120</StartTime>
+            <EndTime>160</EndTime>
+        </Watermark>
+        <DigitalWatermark>
+            <Type>Text</Type>
+            <Message>123456789ab</Message>
+            <Version>V1</Version>
+            <IgnoreError>false</IgnoreError>
+        </DigitalWatermark>
+        <Output>
+            <Region>ap-chongqing</Region>
+            <Bucket>test-123456789</Bucket>
+            <Object>output/out.${ext}</Object>
+        </Output>
+        <UserData>This is my data.</UserData>
+        <JobLevel>0</JobLevel>
+    </Operation>
+    <CallBack>http://callback.demo.com</CallBack>
+    <CallBackFormat>JSON</CallBackFormat>
+</Request>

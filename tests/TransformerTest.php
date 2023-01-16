@@ -258,6 +258,52 @@ class TransformerTest extends TestCase
                     ]],
                 ],
             ],
+            $f = 'tencent-cos-job-super-resolution.xml' => [
+                self::getContents($f),
+                [
+                    'Tag' => ['assertIsString', null],
+                    'Input' => ['assertIsArray', [
+                        'Object' => ['assertIsString', null],
+                    ]],
+                    'Operation' => ['assertIsArray', [
+                        'TemplateId' => ['assertIsString', null],
+                        'TranscodeTemplateId' => ['assertIsString', null],
+                        'WatermarkTemplateId' => ['assertIsArray', [
+                            ['assertIsString', null],
+                            ['assertIsString', null],
+                        ]],
+                        'Watermark' => ['assertIsArray', [
+                            ['assertIsArray', [
+                                'Type'      => ['assertIsString', null],
+                                'LocMode'   => ['assertIsString', null],
+                                'StartTime' => ['assertIsString', null],
+                                'EndTime'   => ['assertIsString', null],
+                            ]],
+                            ['assertIsArray', [
+                                'Type'      => ['assertIsString', null],
+                                'LocMode'   => ['assertIsString', null],
+                                'StartTime' => ['assertIsString', null],
+                                'EndTime'   => ['assertIsString', null],
+                            ]],
+                        ]],
+                        'DigitalWatermark' => ['assertIsArray', [
+                            'Type'        => ['assertIsString', null],
+                            'Message'     => ['assertIsString', null],
+                            'Version'     => ['assertIsString', null],
+                            'IgnoreError' => ['assertIsString', null],
+                        ]],
+                        'Output' => ['assertIsArray', [
+                            'Region' => ['assertIsString', null],
+                            'Bucket' => ['assertIsString', null],
+                            'Object' => ['assertIsString', null],
+                        ]],
+                        'UserData' => ['assertIsString', null],
+                        'JobLevel' => ['assertIsString', null],
+                    ]],
+                    'CallBack' => ['assertIsString', null],
+                    'CallBackFormat' => ['assertIsString', null],
+                ],
+            ],
             $f = 'tencent-cos-service.xml' => [
                 self::getContents($f),
                 [
@@ -699,7 +745,94 @@ class TransformerTest extends TestCase
                     },
                 ],
                 true, false, 'xml', 'item',
-            ]
+            ],
+            'transform tencent COS service' => [
+                [
+                    'Owner' => [
+                        'ID' => 'qcs::cam::uin/100000000001:uin/100000000001',
+                        'DisplayName' => '100000000001',
+                    ],
+                    'Buckets' => [
+                        [
+                            'Name' => 'examplebucket1-1250000000',
+                            'Location' => 'ap-beijing',
+                            'CreationDate' => '2019-05-24T11:49:50Z',
+                        ], [
+                            'Name' => 'examplebucket2-1250000000',
+                            'Location' => 'ap-beijing',
+                            'CreationDate' => '2019-05-24T11:49:50Z',
+                        ], [
+                            'Name' => 'examplebucket3-1250000000',
+                            'Location' => 'ap-frankfurt',
+                            'CreationDate' => '2019-05-24T11:49:50Z',
+                        ], [
+                            'Name' => 'examplebucket4-1250000000',
+                            'Location' => 'ap-frankfurt',
+                            'CreationDate' => '2019-05-24T11:49:50Z',
+                        ],
+                    ],
+                ],
+                true, false, 'ListAllMyBucketsResult', 'Bucket',
+            ],
+            'transform tencent COS service with `wrap`' => [
+                [
+                    'Owner' => [
+                        'ID' => 'qcs::cam::uin/100000000001:uin/100000000001',
+                        'DisplayName' => '100000000001',
+                    ],
+                    'Buckets' => [
+                        'Bucket' => Transformer::wrap([/** @phpstan-ignore-line */
+                            [
+                                'Name'         => 'examplebucket1-1250000000',
+                                'Location'     => 'ap-beijing',
+                                'CreationDate' => '2019-05-24T11:49:50Z',
+                            ], [
+                                'Name'         => 'examplebucket2-1250000000',
+                                'Location'     => 'ap-beijing',
+                                'CreationDate' => '2019-05-24T11:49:50Z',
+                            ], [
+                                'Name'         => 'examplebucket3-1250000000',
+                                'Location'     => 'ap-frankfurt',
+                                'CreationDate' => '2019-05-24T11:49:50Z',
+                            ], [
+                                'Name'         => 'examplebucket4-1250000000',
+                                'Location'     => 'ap-frankfurt',
+                                'CreationDate' => '2019-05-24T11:49:50Z',
+                            ],
+                        ], true, 'Bucket'),
+                    ],
+                ],
+                true, false, 'ListAllMyBucketsResult', 'item',
+            ],
+            'use multi fn `wrap` for different Elements' => [
+                [
+                    'Tag' => 'SuperResolution',
+                    'Input' => 'input/demo.mp4',
+                    'Operation' => [
+                        'TemplateId'          => 't1460606b9752148c4ab182f55163ba7cd',
+                        'TranscodeTemplateId' => 't160606b9752148c4absdfaf2f55163b1f',
+                        'WatermarkTemplateId' => Transformer::wrap([/** @phpstan-ignore-line */
+                            't146d70eb241c44c63b6efc1cc93ccfc5d',
+                            't12a74d11687d444deba8a6cc52051ac27',
+                        ], true, 'WatermarkTemplateId'),
+                        'Watermark' => Transformer::wrap([/** @phpstan-ignore-line */
+                            [
+                                'Type'      => 'Text',
+                                'LocMode'   => 'Absolute',
+                                'StartTime' => '0',
+                                'EndTime'   => '100.5',
+                            ],
+                            [
+                                'Type'      => 'Text',
+                                'LocMode'   => 'Absolute',
+                                'StartTime' => '120',
+                                'EndTime'   => '160',
+                            ],
+                        ], true, 'Watermark'),
+                    ],
+                ],
+                true, false, 'Response', 'item',
+            ],
         ];
     }
 
@@ -736,5 +869,23 @@ class TransformerTest extends TestCase
         } else {
             self::assertRegExp($pattern, $xml);
         }
+    }
+
+    public function testWrapThroughToXml(): void
+    {
+        [
+            'transform tencent COS service' => $v10,
+            'transform tencent COS service with `wrap`' => $v11,
+            'use multi fn `wrap` for different Elements' => $wrapped,
+        ] = $this->arrayToXmlDataProvider();
+
+        $v10Xml = Transformer::toXml(...$v10);
+        $v11Xml = Transformer::toXml(...$v11);
+        self::assertEquals($v10Xml, $v11Xml);
+
+        $xml = Transformer::toXml(...$wrapped);
+        self::assertStringNotContainsString('<item>', $xml);
+        self::assertStringContainsString('</WatermarkTemplateId><WatermarkTemplateId>', $xml);
+        self::assertStringContainsString('</Watermark><Watermark>', $xml);
     }
 }

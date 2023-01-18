@@ -781,7 +781,7 @@ class TransformerTest extends TestCase
                         'DisplayName' => '100000000001',
                     ],
                     'Buckets' => [
-                        'Bucket' => Transformer::wrap([/** @phpstan-ignore-line */
+                        'Bucket' => Transformer::wrap([
                             [
                                 'Name'         => 'examplebucket1-1250000000',
                                 'Location'     => 'ap-beijing',
@@ -811,11 +811,11 @@ class TransformerTest extends TestCase
                     'Operation' => [
                         'TemplateId'          => 't1460606b9752148c4ab182f55163ba7cd',
                         'TranscodeTemplateId' => 't160606b9752148c4absdfaf2f55163b1f',
-                        'WatermarkTemplateId' => Transformer::wrap([/** @phpstan-ignore-line */
+                        'WatermarkTemplateId' => Transformer::wrap([
                             't146d70eb241c44c63b6efc1cc93ccfc5d',
                             't12a74d11687d444deba8a6cc52051ac27',
                         ], true, 'WatermarkTemplateId'),
-                        'Watermark' => Transformer::wrap([/** @phpstan-ignore-line */
+                        'Watermark' => Transformer::wrap([
                             [
                                 'Type'      => 'Text',
                                 'LocMode'   => 'Absolute',

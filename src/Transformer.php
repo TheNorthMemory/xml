@@ -31,7 +31,7 @@ use XMLWriter;
  * Transform the `XML` to `Array` or `Array` to `XML`.
  *
  * @template TKey of array-key
- * @template TValue of \Stringable
+ * @template TValue
  */
 class Transformer
 {
